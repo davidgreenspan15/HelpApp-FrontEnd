@@ -40,8 +40,11 @@
   font-size: 200%;
 }
 .nav-container{
-  /* background-color: blue; */
-  height: 10%;
+  background-color: blue;
+  height: 7%;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
 }
 
 .ui.red.button.login{
@@ -85,4 +88,8 @@
 
 .ui.button:not(.icon)>.icon:not(.button):not(.dropdown){
   margin: 0 !important;
+}
+
+.tile-container {
+  margin-top: 7%;
 }
