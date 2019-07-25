@@ -1,5 +1,5 @@
 import React from 'react'
-import Tile from '../container/Tile.js'
+import Tile from '../components/Tile.js'
 
 
 
@@ -9,7 +9,7 @@ class TilesContainer extends React.Component{
 
   render(){
     return  (
-      <div>
+      <div className="tile-container">
         {this.renderTile()}
       </div>
     )
