@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './containers/NavBar'
+
+
 import TilesContainer from './component/TilesContainer.js';
 import Event from './component/Event.js';
 import EventForm from './component/EventForm.js'
@@ -36,6 +39,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
+        <Navbar />
         <TilesContainer events={this.state.events}/>
         <Event event={this.state.events[0]}/>
         <EventForm/>
@@ -45,6 +49,7 @@ class App extends React.Component {
     );
 
   }
+
 }
 
 export default App;

@@ -31,3 +31,58 @@
     transform: rotate(360deg);
   }
 }
+
+.company-name{
+  margin-top: 1.4%;
+  margin-bottom: 1.4%;
+  font-family: 'Jacques Francois Shadow', cursive;
+  float: left;
+  font-size: 200%;
+}
+.nav-container{
+  /* background-color: blue; */
+  height: 10%;
+}
+
+.ui.red.button.login{
+  float:right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.ui.input {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 40%;
+}
+
+.dollar.sign.icon{
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
+  float:left;
+}
+
+.ui.blue.button{
+  width: 5% !important;
+  float:right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.ui.yellow.button{
+  /* width: 5% !important; */
+  float:right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.ui.green.button{
+  /* width: 7% !important; */
+  float:right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown){
+  margin: 0 !important;
+}
