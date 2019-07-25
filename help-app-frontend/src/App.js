@@ -2,13 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './containers/NavBar'
-
-
-import TilesContainer from './component/TilesContainer.js';
-import Event from './component/Event.js';
-import EventForm from './component/EventForm.js'
-import SignupForm from './component/SignupForm.js'
-import LoginForm from './component/LoginForm.js'
+import TilesContainer from './containers/TilesContainer.js';
+import Event from './components/Event.js';
+import EventForm from './components/EventForm.js'
+import SignupForm from './components/SignupForm.js'
+import LoginForm from './components/LoginForm.js'
 
 
 
