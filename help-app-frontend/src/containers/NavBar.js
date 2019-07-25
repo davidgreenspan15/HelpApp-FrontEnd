@@ -20,7 +20,7 @@ class Navbar extends React.Component{
   render(){
     return(
       <div className="nav-container">
-        <i class="dollar sign icon"></i>
+        <i className="dollar sign icon"></i>
         <div className="company-name">
           Help
         </div>
@@ -37,11 +37,11 @@ class Navbar extends React.Component{
         }
         {
           this.state.loggedIn
-          ? <button className="ui yellow button"><i class="user outline icon"></i></button>
+          ? <button className="ui yellow button"><i className="user outline icon"></i></button>
             : null
         }
         <button className="ui blue button new-event">
-          <i class="calendar plus icon"></i>
+          <i className="calendar plus icon"></i>
         </button>
       </div>
         )
