@@ -37,7 +37,7 @@ class EventForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.addEvent} className="" action="index.html" method="post">
+      <form onSubmit={this.addEvent} className="main-container" action="index.html" method="post">
         <input onChange={this.handleChange} type="text" name="title" placeholder="title"/>
         <input onChange={this.handleChange} type="text" name="description" placeholder="description"/>
         <input onChange={this.handleChange} type="number" name="goal" placeholder="goal"/>

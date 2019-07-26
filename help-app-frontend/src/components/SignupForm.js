@@ -44,7 +44,7 @@ class SignupForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.addUser} className="" action="index.html" method="post">
+      <form onSubmit={this.addUser} className="main-container" action="index.html" method="post">
         <input onChange={this.handleChange} type="text" name="name" placeholder="name"/>
         <input onChange={this.handleChange} type="username" name="username" placeholder="username"/>
         <input onChange={this.handleChange} type="password" name="password" placeholder="password"/>

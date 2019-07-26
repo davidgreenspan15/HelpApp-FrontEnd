@@ -7,6 +7,7 @@ import Event from './components/Event.js';
 import EventForm from './components/EventForm.js'
 import SignupForm from './components/SignupForm.js'
 import LoginForm from './components/LoginForm.js'
+import {Route, Switch} from 'react-router-dom'
 
 
 
@@ -81,11 +82,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar />
-        <TilesContainer events={this.state.events}/>
         <Event event={this.state.events[0]}/>
-        <EventForm/>
-        <SignupForm/>
-        <LoginForm/>
+        <Switch >
+          <Route path="/eventform" render={()=> <EventForm/>}/>
+          <Route path="/signup" render={()=> <SignupForm/>}/>
+          <Route path="/login" render={()=> <LoginForm/>}/>
+          <Route path="/" render={() => <TilesContainer events={this.state.events}/>}/>
+        </Switch>
       </div>
     );
 
