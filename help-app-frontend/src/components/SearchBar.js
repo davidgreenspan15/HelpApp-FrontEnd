@@ -8,18 +8,21 @@ class SearchBar extends React.Component{
   handleChange = (event) => {
     this.setState({
       search: event.target.value
-    }, () => console.log(this.state.search))
+    })
   }
 
-  handleSearch = () => {
-    console.log("Here")
+  handleSearch = (e) => {
+    e.preventDefault()
+    this.props.findEvents(this.state.search)
   }
 
   render(){
     return(
         <div class="ui icon input">
-          <input onChange={(e) => this.handleChange(e)} type="text" placeholder="Search..."/>
-          <i onClick={this.handleSearch} class="search icon"></i>
+          <form onSubmit={this.handleSearch} className= "ui icon input" action="index.html" method="post">
+            <input onChange={(e) => this.handleChange(e)} type="text" placeholder="Search..."/>
+            <button type="Submit"></button>
+          </form>
         </div>
       )
     }
