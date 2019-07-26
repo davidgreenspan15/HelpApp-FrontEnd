@@ -9,7 +9,7 @@ class TilesContainer extends React.Component{
 
   render(){
     return  (
-      <div className="tile-container">
+      <div className="main-container">
         {this.renderTile()}
       </div>
     )
