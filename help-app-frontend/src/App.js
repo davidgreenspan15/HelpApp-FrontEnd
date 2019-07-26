@@ -16,6 +16,7 @@ class App extends React.Component {
   state = {
     currentUser: null,
     events: [],
+    filterEvents: [],
     dontations: []
   }
 
@@ -46,7 +47,8 @@ class App extends React.Component {
     .then(r=> r.json())
     .then(events => {
       this.setState({
-        events: events
+        events: events,
+        filterEvents: events
       })
     })
 
@@ -72,21 +74,26 @@ class App extends React.Component {
     this.setState({
       currentUser: user
     },() => {
-      localStorage.user_id: user.id,
+      localStorage.user_id = user.id
       this.props.history.push("/events")
     })
   }
 
+  findEvents = (search) => {
+    this.setState({
+      events: this.state.filterEvents.filter( event => event.title.toLowerCase().includes(search.toLowerCase()))
+    })
+  }
 
   render(){
     return (
       <div className="App">
-        <Navbar />
-        <Event event={this.state.events[0]}/>
+        <Navbar findEvents={this.findEvents} />
+        <Event event={this.state.currentUser}/>
         <Switch >
-          <Route path="/eventform" render={()=> <EventForm/>}/>
-          <Route path="/signup" render={()=> <SignupForm/>}/>
-          <Route path="/login" render={()=> <LoginForm/>}/>
+          <Route path="/eventform" render={()=> <EventForm />}/>
+          <Route path="/signup" render={()=> <SignupForm setUser={this.setUser}/>}/>
+          <Route path="/login" render={()=> <LoginForm setUser={this.setUser}/>}/>
           <Route path="/" render={() => <TilesContainer events={this.state.events}/>}/>
         </Switch>
       </div>

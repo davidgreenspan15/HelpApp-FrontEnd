@@ -6,6 +6,7 @@ class SignupForm extends React.Component{
     name: "",
     password: "",
     username: "",
+    passwordComfirmation: "",
     creditCard: 0
   }
 
@@ -17,29 +18,34 @@ class SignupForm extends React.Component{
 
   addUser = (event) => {
     event.preventDefault()
-    fetch("http://localhost:3000/users",{
-      method: "POST",
-      headers: {
+    if (this.state.password === this.state.passwordComfirmation){
+      fetch("http://localhost:3000/users",{
+        method: "POST",
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-      body:JSON.stringify({
-        name: this.state.name,
-        password: this.state.password,
-        username: this.state.username,
-        credit_card: this.state.creditCard
-      })
-      .then(r=>r.json())
-      .then(newUser => {
-        if(newUser.errors){
-          alert(newUser.errors)
-        }else{
-          this.props.setUser(response)
+        body: JSON.stringify({
+          name: this.state.name,
+          password: this.state.password,
+          username: this.state.username,
+          credit_card: this.state.creditCard
+        })
+        })
+        .then(r=>r.json())
+        .then(newUser => {
+          if(newUser.errors){
+            alert(newUser.errors)
+          }else{
+            this.props.setUser(newUser)
+          }
         }
-      }
-        )
-    })
+      )
+
   }
+
+    }
+
 
 
   render(){
@@ -48,6 +54,7 @@ class SignupForm extends React.Component{
         <input onChange={this.handleChange} type="text" name="name" placeholder="name"/>
         <input onChange={this.handleChange} type="username" name="username" placeholder="username"/>
         <input onChange={this.handleChange} type="password" name="password" placeholder="password"/>
+        <input onChange={this.handleChange} type="password" name="passwordComfirmation" placeholder="password confirmation"/>
         <input onChange={this.handleChange} type="number" name="creditCard" placeholder="creditCard"/>
         <button type="Submit">Submit</button>
       </form>

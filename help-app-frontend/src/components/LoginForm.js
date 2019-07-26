@@ -13,7 +13,7 @@ class LoginForm extends React.Component{
     })
   }
 
-  login = () => {
+  login = (event) => {
     event.preventDefault()
     if(this.state.password){
       fetch("http://localhost:3000/login",{
@@ -32,9 +32,8 @@ class LoginForm extends React.Component{
         if(user.errors){
           alert(user.errors)
         }else{
-          this.setState({
             this.props.setUser(user)
-          })
+
         }
       })
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchBar from '../components/SearchBar'
-
+import {Link} from 'react-router-dom'
 class Navbar extends React.Component{
   state = {
     search: "",
@@ -21,17 +21,17 @@ class Navbar extends React.Component{
     return(
       <div className="nav-container">
         <i className="dollar sign icon"></i>
-        <div className="company-name">
+        <Link to="/"><div className="company-name">
           Help
-        </div>
-        <SearchBar/>
+        </div></Link>
+      <SearchBar findEvents={this.props.findEvents}/>
         {
           this.state.loggedIn ?
           null
           :
           <span>
-            <button className="ui red button login">Login</button>
-            <button className="ui green button">Signup</button>
+            <Link to="/login"><button className="ui red button login">Login</button></Link>
+              <Link to="/signup"><button className="ui green button">Signup</button></Link>
           </span>
 
         }
