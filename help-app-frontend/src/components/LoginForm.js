@@ -22,7 +22,7 @@ class LoginForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.login} className="" action="index.html" method="post">
+      <form onSubmit={this.login} className="main-container" action="index.html" method="post">
         <input onChange={this.handleChange} type="username" name="username" placeholder="username"/>
         <input onChange={this.handleChange} type="password" name="password" placeholder="password"/>
         <button type="Submit">Submit</button>
