@@ -14,10 +14,31 @@ class LoginForm extends React.Component{
   }
 
   login = () => {
-    fetch("http://localhost:3000/users/:id")
+    event.preventDefault()
+    if(this.state.password){
+      fetch("http://localhost:3000/login",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accepted": "application/json"
+        },
+        body: JSON.stringify({
+          username: this.state.username,
+          password: this.state.password
+        })
+      })
       .then(r=>r.json())
-      .then(newUser => console.log(newUser))
+      .then(user => {
+        if(user.errors){
+          alert(user.errors)
+        }else{
+          this.setState({
+            this.props.setUser(user)
+          })
+        }
+      })
     }
+  }
 
 
   render(){

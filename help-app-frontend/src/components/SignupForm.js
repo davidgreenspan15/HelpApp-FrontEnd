@@ -16,6 +16,7 @@ class SignupForm extends React.Component{
   }
 
   addUser = (event) => {
+    event.preventDefault()
     fetch("http://localhost:3000/users",{
       method: "POST",
       headers: {
@@ -26,11 +27,17 @@ class SignupForm extends React.Component{
         name: this.state.name,
         password: this.state.password,
         username: this.state.username,
-        credit_card: this.state.creditCard,
-
+        credit_card: this.state.creditCard
       })
       .then(r=>r.json())
-      .then(newUser => console.log(newUser))
+      .then(newUser => {
+        if(newUser.errors){
+          alert(newUser.errors)
+        }else{
+          this.props.setUser(response)
+        }
+      }
+        )
     })
   }
 
