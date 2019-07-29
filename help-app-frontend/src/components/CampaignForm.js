@@ -1,6 +1,6 @@
 import React from 'react'
 
-class EventForm extends React.Component{
+class CampaignForm extends React.Component{
 
   state = {
     title: "",
@@ -15,7 +15,7 @@ class EventForm extends React.Component{
     })
   }
 
-  addEvent = (event) => {
+  addCampaign = (event) => {
     fetch("http://localhost:3000/events",{
       method: "POST",
       headers: {
@@ -30,14 +30,14 @@ class EventForm extends React.Component{
 
       })
       .then(r=>r.json())
-      .then(newEvent => this.props.addEventToEvents(newEvent))
+      .then(newCampaign => this.props.addCampaignToCampaigns(newCampaign))
     })
   }
 
 
   render(){
     return(
-      <form onSubmit={this.addEvent} className="main-container" action="index.html" method="post">
+      <form onSubmit={this.addCampaign} className="main-container" action="index.html" method="post">
         <input onChange={this.handleChange} type="text" name="title" placeholder="title"/>
         <input onChange={this.handleChange} type="text" name="description" placeholder="description"/>
         <input onChange={this.handleChange} type="number" name="goal" placeholder="goal"/>
@@ -49,4 +49,4 @@ class EventForm extends React.Component{
   }
 }
 
-export default EventForm
+export default CampaignForm
