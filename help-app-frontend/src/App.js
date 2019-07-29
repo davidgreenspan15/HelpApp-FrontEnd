@@ -19,32 +19,28 @@ class App extends React.Component {
     filterCampaigns: [],
     dontations: [],
     foundCampaign: {},
+    loggedIn: false
+
   }
 
   componentDidMount(){
-    const token = localStorage.token
-    if(token){
-      //get user info
-      fetch("http://localhost:3000/auto_login",{
-        headers: {
-          "Authorization": token
-        }
-      })
-      .then(resp => resp.json())
-      .then(user => {
-        if(user.errors){
-          alert(user.errors)
-        }else{
-          this.setState({
-            currentUser: user
-          })
-        }
-      })
-
-    }else{
-      //don't do anything
-    }
-    fetch("http://localhost:3000/campaigns")
+    fetch("http://localhost:3000/auto_login",{
+       headers: {
+         "Authorization": localStorage.user_id
+       }
+     })
+     .then(resp => resp.json())
+     .then(user => {
+       if(user.errors){
+         alert(user.errors)
+       }else{
+         this.setState({
+           currentUser: user,
+           loggedIn: true
+         })
+       }
+     })
+  fetch("http://localhost:3000/campaigns")
     .then(r=> r.json())
     .then(campaigns => {
       this.setState({
@@ -54,14 +50,14 @@ class App extends React.Component {
       })
     })
 
-
   }
 
 
 
   logout = () => {
     this.setState({
-      currentUser: null
+      currentUser: null,
+      loggedIn: false
     },() => {
       localStorage.removeItem("user_id")
       this.props.history.push("/login")
@@ -76,10 +72,11 @@ class App extends React.Component {
 
   setUser = (user) => {
     this.setState({
+      loggedIn: true,
       currentUser: user.user
     },() => {
-      localStorage.token = user.id
-      this.props.history.push("/campains")
+      localStorage.user_id = user.id
+      this.props.history.push("/campaigns")
     })
   }
 
@@ -104,8 +101,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Navbar findCampaigns={this.findCampaigns} />
-
+        <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
         <Switch >
           <Route path={this.stringCamapaignUrl()} render={()=><Campaign campaign={this.state.foundCampaign}/> }/>
           <Route path="/campaignform" render={()=> <CampaignForm />}/>

@@ -18,7 +18,10 @@ class SignupForm extends React.Component{
 
   addUser = (event) => {
     event.preventDefault()
+    console.log(this.state.password)
+    console.log(this.state.passwordComfirmation)
     if (this.state.password === this.state.passwordComfirmation){
+      console.log("Here")
       fetch("http://localhost:3000/users",{
         method: "POST",
         headers: {
@@ -70,12 +73,12 @@ class SignupForm extends React.Component{
 
         <div className="field">
           <label>Password Confirmation</label>
-          <input onChange={this.handleChange} type="password" name="password" placeholder="password confirmation"/>
+          <input onChange={this.handleChange} type="password" name="passwordComfirmation" placeholder="password confirmation"/>
         </div>
 
         <div className="field">
           <label>Credit Card</label>
-          <input onChange={this.handleChange} type="password" name="password" placeholder="Credit Card"/>
+          <input onChange={this.handleChange} type="password" name="creditCard" placeholder="Credit Card"/>
         </div>
 
         <button className="ui teal button" type="submit">Submit</button>

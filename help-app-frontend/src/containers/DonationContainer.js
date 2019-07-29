@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import Donation from '../components/Donation.js'
 
 class DonationContainer extends React.Component{
