@@ -17,9 +17,9 @@ class App extends React.Component {
     currentUser: null,
     campaigns: [],
     filterCampaigns: [],
-    dontations: [],
     foundCampaign: {},
-    loggedIn: false
+    loggedIn: false,
+    donations: []
 
   }
 
@@ -85,8 +85,15 @@ class App extends React.Component {
       campaigns: this.state.filterCampaigns.filter( campaign => campaign.title.toLowerCase().includes(search.toLowerCase()))
     })
   }
-
   findClickedCampaign = (selectedCamapaign) => {
+    fetch("http://localhost:3000/donations")
+    .then(resp => resp.json())
+    .then(donations => {
+      let campaignDonations = donations.filter(donation => donation.campaign_id === selectedCamapaign.id)
+      this.setState({
+        donations: campaignDonations
+      })
+    })
     this.setState({
       foundCampaign: this.state.campaigns.find(campaign => campaign.id === selectedCamapaign.id)
     },() =>{
@@ -98,12 +105,36 @@ class App extends React.Component {
     return `/camapaigns/${this.state.foundCampaign.id}`
   }
 
+  updatedCampaign = (updatedCampaign) => {
+    console.log(updatedCampaign.id)
+    this.setState({
+      campaigns: this.state.campaigns.map(campaign => {
+        if (campaign.id === updatedCampaign.id){
+          return updatedCampaign
+        }else {
+          return campaign
+        }
+      }),
+      filterCampaigns: this.state.filterCampaigns.map(campaign =>
+      {
+        if (campaign.id === updatedCampaign.id){
+          return updatedCampaign
+        }else {
+          return campaign
+        }
+      }),
+      foundCampaign: updatedCampaign
+    })
+  }
+
+
+
   render(){
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
         <Switch >
-          <Route path={this.stringCamapaignUrl()} render={()=><Campaign campaign={this.state.foundCampaign}/> }/>
+          <Route path={this.stringCamapaignUrl()} render={()=><Campaign campaign={this.state.foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} /> }/>
           <Route path="/campaignform" render={()=> <CampaignForm />}/>
           <Route path="/signup" render={()=> <SignupForm setUser={this.setUser}/>}/>
           <Route path="/login" render={()=> <LoginForm setUser={this.setUser}/>}/>

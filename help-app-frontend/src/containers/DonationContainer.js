@@ -1,8 +1,10 @@
 import React from 'react'
-<<<<<<< HEAD
 import Donation from '../components/Donation.js'
 
 class DonationContainer extends React.Component{
+
+
+
 
   state = {
       clicked: false,
@@ -28,17 +30,22 @@ class DonationContainer extends React.Component{
       method: "POST",
       headers:{
        "Content-Type": "application/json",
-       "Accepted": "application/json"
+       "Accept": "application/json"
      },
      body: JSON.stringify({
        campaign_id: this.props.campaign.id,
-       user_id:parseInt(localStorage.user_id),
+       user_id: localStorage.user_id,
        amount: this.state.amount
-     })})
-     .then(r => r.json())
-     .then(console.log())
+     })
+   })
+     // .then(console.log)
+     .then(resp => resp.json())
+     .then(obj => {
+       this.props.updatedCampaign(obj.campaign)
+     })
   }
 
+  renderDonationTiles = () => this.props.donations.map(donation => <Donation donation={donation}/>)
 
   render(){
    return(
@@ -59,7 +66,6 @@ class DonationContainer extends React.Component{
            </div>
            : null
          }
-
      </div>
    )
  }

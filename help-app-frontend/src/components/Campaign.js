@@ -10,7 +10,7 @@ class Campaign extends React.Component{
     return(
       <div>
       <CampaignMainContainer campaign={this.props.campaign}/>
-      <DonationContainer campaign={this.props.campaign}/>
+      <DonationContainer campaign={this.props.campaign} donation={this.props.donations} updatedCampaign={this.props.updatedCampaign}/>
       </div>
     )
   }

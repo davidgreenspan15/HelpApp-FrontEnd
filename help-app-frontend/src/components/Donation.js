@@ -4,7 +4,7 @@ class Donation extends React.Component{
   render(){
     return(
 
-      <div>hello</div>
+      <div>{this.props.donations}</div>
 
     )
   }
