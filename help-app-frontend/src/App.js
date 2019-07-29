@@ -18,7 +18,9 @@ class App extends React.Component {
     campaigns: [],
     filterCampaigns: [],
     dontations: [],
+    foundCampaign: {},
     loggedIn: false
+
   }
 
   componentDidMount(){
@@ -44,8 +46,10 @@ class App extends React.Component {
       this.setState({
         campaigns: campaigns,
         filterCampaigns: campaigns
+      }, () => {
       })
     })
+
   }
 
 
@@ -72,7 +76,7 @@ class App extends React.Component {
       currentUser: user.user
     },() => {
       localStorage.user_id = user.id
-      this.props.history.push("/campains")
+      this.props.history.push("/campaigns")
     })
   }
 
@@ -82,20 +86,28 @@ class App extends React.Component {
     })
   }
 
-  // findClickedCampaign = (event) => {
-  //   this.state.campaigns.find(camapaign =>)
-  // }
+  findClickedCampaign = (selectedCamapaign) => {
+    this.setState({
+      foundCampaign: this.state.campaigns.find(campaign => campaign.id === selectedCamapaign.id)
+    },() =>{
+      this.props.history.push(this.stringCamapaignUrl())
+    } )
+  }
+
+  stringCamapaignUrl = () => {
+    return `/camapaigns/${this.state.foundCampaign.id}`
+  }
 
   render(){
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
-        <Campaign campaign={this.state.currentUser}/>
         <Switch >
+          <Route path={this.stringCamapaignUrl()} render={()=><Campaign campaign={this.state.foundCampaign}/> }/>
           <Route path="/campaignform" render={()=> <CampaignForm />}/>
           <Route path="/signup" render={()=> <SignupForm setUser={this.setUser}/>}/>
           <Route path="/login" render={()=> <LoginForm setUser={this.setUser}/>}/>
-          <Route path="/" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} campaigns={this.state.campaigns}/>}/>
+          <Route path="/" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} progress={this.state.progress} campaigns={this.state.campaigns} stringCamapaignUrl={this.stringCamapaignUrl}/>}/>
         </Switch>
       </div>
     );
