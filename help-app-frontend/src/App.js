@@ -21,12 +21,12 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    const user_id = localStorage.user_id
-    if(user_id){
+    const token = localStorage.token
+    if(token){
       //get user info
       fetch("http://localhost:3000/auto_login",{
         headers: {
-          "Authorization": user_id
+          "Authorization": token
         }
       })
       .then(resp => resp.json())
@@ -72,9 +72,9 @@ class App extends React.Component {
 
   setUser = (user) => {
     this.setState({
-      currentUser: user
+      currentUser: user.user
     },() => {
-      localStorage.user_id = user.id
+      localStorage.token = user.token
       this.props.history.push("/events")
     })
   }

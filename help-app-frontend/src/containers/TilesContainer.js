@@ -9,9 +9,12 @@ class TilesContainer extends React.Component{
 
   render(){
     return  (
-
       <div className="main-container">
-        {this.renderTile()}
+        <div className="ui relaxed grid">
+          <div class="three column row">
+            {this.renderTile()}
+          </div>
+        </div>
       </div>
     )
   }

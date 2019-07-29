@@ -50,15 +50,36 @@ class SignupForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.addUser} className="main-container" action="index.html" method="post">
-        <input onChange={this.handleChange} type="text" name="name" placeholder="name"/>
-        <input onChange={this.handleChange} type="username" name="username" placeholder="username"/>
-        <input onChange={this.handleChange} type="password" name="password" placeholder="password"/>
-        <input onChange={this.handleChange} type="password" name="passwordComfirmation" placeholder="password confirmation"/>
-        <input onChange={this.handleChange} type="number" name="creditCard" placeholder="creditCard"/>
-        <button type="Submit">Submit</button>
-      </form>
 
+      <form onSubmit={this.login} className="ui form main-container" action="index.html" method="post">
+
+        <div className="field">
+          <label>Name</label>
+          <input onChange={this.handleChange} type="text" name="username" placeholder="username"/>
+        </div>
+
+        <div className="field">
+          <label>User Name</label>
+          <input onChange={this.handleChange} type="text" name="username" placeholder="username"/>
+        </div>
+
+        <div className="field">
+          <label>Password</label>
+          <input onChange={this.handleChange} type="password" name="password" placeholder="password"/>
+        </div>
+
+        <div className="field">
+          <label>Password Confirmation</label>
+          <input onChange={this.handleChange} type="password" name="password" placeholder="password confirmation"/>
+        </div>
+
+        <div className="field">
+          <label>Credit Card</label>
+          <input onChange={this.handleChange} type="password" name="password" placeholder="Credit Card"/>
+        </div>
+
+        <button className="ui teal button" type="submit">Submit</button>
+      </form>
     )
   }
 }
