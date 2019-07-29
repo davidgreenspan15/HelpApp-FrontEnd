@@ -5,7 +5,7 @@ import Tile from '../components/Tile.js'
 
 class TilesContainer extends React.Component{
 
-  renderTile = () => this.props.events.map(event => <Tile key={event.id} event={event}/>)
+  renderTile = () => this.props.campaigns.map(campaign => <Tile key={campaign.id} campaign={campaign} findClickedCampaign={this.props.findClickedEvent}/>)
 
   render(){
     return  (
