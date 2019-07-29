@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './containers/NavBar'
 import TilesContainer from './containers/TilesContainer.js';
-import Event from './components/Event.js';
-import EventForm from './components/EventForm.js'
+import Campaign from './components/Campaign.js';
+import CampaignForm from './components/CampaignForm.js'
 import SignupForm from './components/SignupForm.js'
 import LoginForm from './components/LoginForm.js'
 import {Route, Switch} from 'react-router-dom'
@@ -15,8 +15,8 @@ class App extends React.Component {
 
   state = {
     currentUser: null,
-    events: [],
-    filterEvents: [],
+    campaigns: [],
+    filterCampaigns: [],
     dontations: []
   }
 
@@ -45,15 +45,16 @@ class App extends React.Component {
     }
     fetch("http://localhost:3000/campaigns")
     .then(r=> r.json())
-    .then(events => {
+    .then(campaigns => {
       this.setState({
-        events: events,
-        filterEvents: events
+        campaigns: campaigns,
+        filterCampaigns: campaigns
       })
     })
 
-
   }
+
+
 
   logout = () => {
     this.setState({
@@ -64,9 +65,9 @@ class App extends React.Component {
     })
   }
 
-  addEventToEvents = (newEvent) => {
+  addCampaignToCampaigns = (newCampaign) => {
     this.setState({
-      events: [...this.state.events,newEvent]
+      campaigns: [...this.state.campaigns,newCampaign]
     })
   }
 
@@ -74,27 +75,31 @@ class App extends React.Component {
     this.setState({
       currentUser: user.user
     },() => {
-      localStorage.token = user.token
-      this.props.history.push("/events")
+      localStorage.token = token
+      this.props.history.push("/campains")
     })
   }
 
-  findEvents = (search) => {
+  findCampaigns = (search) => {
     this.setState({
-      events: this.state.filterEvents.filter( event => event.title.toLowerCase().includes(search.toLowerCase()))
+      campaigns: this.state.filterCampaigns.filter( campaign => campaign.title.toLowerCase().includes(search.toLowerCase()))
     })
   }
+
+  // findClickedCampaign = (event) => {
+  //   this.state.campaigns.find(camapaign =>)
+  // }
 
   render(){
     return (
       <div className="App">
-        <Navbar findEvents={this.findEvents} />
-        <Event event={this.state.currentUser}/>
+        <Navbar findCampaigns={this.findCampaigns} />
+        <Campaign campaign={this.state.currentUser}/>
         <Switch >
-          <Route path="/eventform" render={()=> <EventForm />}/>
+          <Route path="/campaignform" render={()=> <CampaignForm />}/>
           <Route path="/signup" render={()=> <SignupForm setUser={this.setUser}/>}/>
           <Route path="/login" render={()=> <LoginForm setUser={this.setUser}/>}/>
-          <Route path="/" render={() => <TilesContainer events={this.state.events}/>}/>
+          <Route path="/" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} campaigns={this.state.campaigns}/>}/>
         </Switch>
       </div>
     );

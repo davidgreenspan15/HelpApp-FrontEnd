@@ -1,6 +1,6 @@
 import React from 'react'
 
-class EventForm extends React.Component{
+class CampaignForm extends React.Component{
 
   state = {
     title: "",
@@ -32,11 +32,11 @@ class EventForm extends React.Component{
       })
     })
       .then(r=>r.json())
-      .then(newEvent => {
-        if(newEvent.errors){
-          alert(newEvent.errors)
+      .then(newCampaign => {
+        if(newCampaign.errors){
+          alert(newCampaign.errors)
         }else{
-          this.props.addEventToEvents(newEvent)
+          this.props.addCampaignToCampaigns(newCampaign)
         }
       })
   }
@@ -73,4 +73,4 @@ class EventForm extends React.Component{
   }
 }
 
-export default EventForm
+export default CampaignForm

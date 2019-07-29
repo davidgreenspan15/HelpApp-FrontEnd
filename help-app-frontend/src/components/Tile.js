@@ -5,33 +5,33 @@ import { Link } from 'react-router-dom'
 class Tile extends React.Component{
 
   state = {
-    progress: (30000/this.props.event.goal)*100
+    progress: (30000/this.props.campaign.goal)*100
   }
 
   stringEventUrl = () => {
-    return `/events/${this.props.event.id}`
+    return `/events/${this.props.campaign.id}`
   }
 
   render(){
     return(
-      <div className="individual-card">
+      <div className="individual-card" onClick={()=>this.props.findClickedCampaign(this.props.campaign)}>
         <div class="ui card">
           <div class="image">
 
           </div>
           <div class="content">
-            <Link to={this.stringEventUrl()} className="header">{this.props.event.title}</Link>
+            <Link to={this.stringEventUrl()} className="header">{this.props.campaign.title}</Link>
             <div class="meta">
-              <span class="date">Created On: {this.props.event.created_at.split('T')[0]}</span>
+              <span class="date">Created On: {this.props.campaign.created_at.split('T')[0]}</span>
             </div>
             <div class="description">
-              {this.props.event.description.substring(0,100) + "..."}
+              {this.props.campaign.description.substring(0,100) + "..."}
             </div>
           </div>
           <div class="extra content">
               <i class="dollar sign icon"></i>
               <div>
-                Amount Raised: {this.props.event.raised_donation + "/" + this.props.event.goal }
+                Amount Raised: {this.props.campaign.raised_donation + "/" + this.props.campaign.goal }
                 </div>
                 <ProgressBar progress={this.state.progress}/>
           </div>

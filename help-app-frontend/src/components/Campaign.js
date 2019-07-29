@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Event extends React.Component{
+class Campaign extends React.Component{
 
   componentDidMount(){
   }
@@ -13,4 +13,4 @@ class Event extends React.Component{
   }
 }
 
-export default Event
+export default Campaign
