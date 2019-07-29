@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 class Navbar extends React.Component{
   state = {
     search: "",
-    loggedIn: false
   }
 
   handleChange = (event) => {
@@ -24,10 +23,18 @@ class Navbar extends React.Component{
         <Link to="/"><div className="company-name">
           Help
         </div></Link>
-      <SearchBar findEvents={this.props.findEvents}/>
+      <SearchBar findCampaigns={this.props.findCampaigns}/>
         {
-          this.state.loggedIn ?
-          null
+          this.props.loggedIn ?
+          <span>
+          <Link to="/campaignform">
+            <button className="ui blue button new-event">
+              <i className="calendar plus icon"></i>
+            </button>
+          </Link>
+            <button className="ui yellow button"><i className="user outline icon"></i></button>
+            <button onClick={this.props.logout} className="ui red button">Logout</button>
+          </span>
           :
           <span>
             <Link to="/login"><button className="ui red button login">Login</button></Link>
@@ -35,16 +42,6 @@ class Navbar extends React.Component{
           </span>
 
         }
-        {
-          this.state.loggedIn
-          ? <button className="ui yellow button"><i className="user outline icon"></i></button>
-            : null
-        }
-        <Link to="/eventform">
-          <button className="ui blue button new-event">
-            <i className="calendar plus icon"></i>
-          </button>
-        </Link>
       </div>
         )
       }
