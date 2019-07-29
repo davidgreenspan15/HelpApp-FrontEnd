@@ -5,22 +5,22 @@ import { Link } from 'react-router-dom'
 class Tile extends React.Component{
 
   state = {
-    progress: (30000/this.props.campaign.goal)*100
+    progress: (this.props.campaign.raised_donation/this.props.campaign.goal)*100
   }
 
-  stringEventUrl = () => {
-    return `/events/${this.props.campaign.id}`
-  }
+
+
+
 
   render(){
     return(
-      <div className="individual-card" onClick={()=>this.props.findClickedCampaign(this.props.campaign)}>
+      <div className="individual-card" onClick={(event)=>this.props.findClickedCampaign(this.props.campaign,event)}>
         <div class="ui card">
           <div class="image">
-
+            <img src={this.props.campaign.image} alt=""/>
           </div>
           <div class="content">
-            <Link to={this.stringEventUrl()} className="header">{this.props.campaign.title}</Link>
+            <div className="header">{this.props.campaign.title}</div>
             <div class="meta">
               <span class="date">Created On: {this.props.campaign.created_at.split('T')[0]}</span>
             </div>
