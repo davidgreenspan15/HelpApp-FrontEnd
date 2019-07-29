@@ -18,12 +18,10 @@ class SearchBar extends React.Component{
 
   render(){
     return(
-        <div class="ui icon input">
-          <form onSubmit={this.handleSearch} className= "ui icon input" action="index.html" method="post">
+          <form onSubmit={this.handleSearch} className="ui icon input" action="index.html" method="post">
             <input onChange={(e) => this.handleChange(e)} type="text" placeholder="Search..."/>
-            <button type="Submit"></button>
+            <button type="Submit"><i className="ui icon search"></i></button>
           </form>
-        </div>
       )
     }
 }

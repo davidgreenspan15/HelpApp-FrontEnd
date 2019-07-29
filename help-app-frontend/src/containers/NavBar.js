@@ -40,9 +40,11 @@ class Navbar extends React.Component{
           ? <button className="ui yellow button"><i className="user outline icon"></i></button>
             : null
         }
-        <button className="ui blue button new-event">
-          <i className="calendar plus icon"></i>
-        </button>
+        <Link to="/eventform">
+          <button className="ui blue button new-event">
+            <i className="calendar plus icon"></i>
+          </button>
+        </Link>
       </div>
         )
       }
