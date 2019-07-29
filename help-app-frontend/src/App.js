@@ -43,7 +43,7 @@ class App extends React.Component {
     }else{
       //don't do anything
     }
-    fetch("http://localhost:3000/events")
+    fetch("http://localhost:3000/campaigns")
     .then(r=> r.json())
     .then(events => {
       this.setState({

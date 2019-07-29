@@ -15,9 +15,9 @@ class EventForm extends React.Component{
     },() => console.log(this.state.goal))
   }
 
-  addEvent = (event) => {
+  addCampaign = (event) => {
     event.preventDefault()
-    fetch("http://localhost:3000/events",{
+    fetch("http://localhost:3000/campaigns",{
       method: "POST",
       headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ class EventForm extends React.Component{
   render(){
     return(
 
-      <form onSubmit={this.addEvent} className="ui form main-container" action="index.html" method="post">
+      <form onSubmit={this.addCampaign} className="ui form main-container" action="index.html" method="post">
 
         <div className="field">
           <label>Title</label>

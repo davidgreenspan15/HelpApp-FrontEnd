@@ -23,7 +23,7 @@ class SignupForm extends React.Component{
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accepted': 'application/json'
         },
         body: JSON.stringify({
           name: this.state.name,
@@ -51,7 +51,7 @@ class SignupForm extends React.Component{
   render(){
     return(
 
-      <form onSubmit={this.login} className="ui form main-container" action="index.html" method="post">
+      <form onSubmit={this.addUser} className="ui form main-container" action="index.html" method="post">
 
         <div className="field">
           <label>Name</label>
