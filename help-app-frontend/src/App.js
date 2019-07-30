@@ -8,6 +8,8 @@ import CampaignForm from './components/CampaignForm.js'
 import SignupForm from './components/SignupForm.js'
 import LoginForm from './components/LoginForm.js'
 import {Route, Switch} from 'react-router-dom'
+import ProfileContainer from './containers/ProfileContainer.js'
+
 
 
 
@@ -52,28 +54,36 @@ class App extends React.Component {
 
   }
 
+  changeCurrentUser = (updatedUser) => {
+    this.setState({
+      currentUser:updatedUser
+    })
+  }
+
 
 
   logout = () => {
+    this.props.history.push("/login")
     this.setState({
       currentUser: null,
       loggedIn: false
     },() => {
       localStorage.removeItem("user_id")
-      this.props.history.push("/login")
     })
   }
 
   addCampaignToCampaigns = (newCampaign) => {
     this.setState({
       campaigns: [...this.state.campaigns,newCampaign]
-    })
+    },() => {
+      this.props.history.push("/campaigns")
+    } )
   }
 
   setUser = (user) => {
     this.setState({
       loggedIn: true,
-      currentUser: user.user
+      currentUser: user
     },() => {
       localStorage.user_id = user.id
       this.props.history.push("/campaigns")
@@ -97,7 +107,7 @@ class App extends React.Component {
     this.setState({
       foundCampaign: this.state.campaigns.find(campaign => campaign.id === selectedCamapaign.id)
     },() =>{
-      this.props.history.push(this.stringCamapaignUrl())
+      this.props.history.push(`/campaigns/${selectedCamapaign.id}`)
     } )
   }
 
@@ -127,18 +137,35 @@ class App extends React.Component {
     })
   }
 
+  stringUserUrl = () => {
+    return `/users/${this.state.currentUser.id}`
+  }
 
+//   {this.state.currentUser ? <ProfileContainer findClickedCampaign={this.findClickedCampaign} stringCamapaignUrl={this.stringCamapaignUrl}user={this.state.currentUser} campaigns={this.state.campaigns} changeCurrentUser={this.changeCurrentUser}/> :null
+// }
 
   render(){
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
-        <Switch >
-          <Route path={this.stringCamapaignUrl()} render={()=><Campaign campaign={this.state.foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} /> }/>
-          <Route path="/campaignform" render={()=> <CampaignForm />}/>
+
+      <Switch>
+          <Route path="/campaigns/:id" render={(routerProps)=>{
+
+              const foundCampaign = this.state.campaigns.find(campaign => campaign.id === parseInt(routerProps.match.params.id))
+              console.log(foundCampaign)
+
+              if (foundCampaign) {
+                return (
+                  <Campaign campaign={foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} />
+                )
+              }
+            }}/>
+          <Route path="/profile" render={()=> <ProfileContainer findClickedCampaign={this.findClickedCampaign} stringCamapaignUrl={this.stringCamapaignUrl}user={this.state.currentUser} campaigns={this.state.campaigns} changeCurrentUser={this.changeCurrentUser} />}/>
+          <Route path="/campaignform" render={()=> <CampaignForm  addCampaignToCampaigns={this.addCampaignToCampaigns}/>}/>
           <Route path="/signup" render={()=> <SignupForm setUser={this.setUser}/>}/>
           <Route path="/login" render={()=> <LoginForm setUser={this.setUser}/>}/>
-          <Route path="/" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} progress={this.state.progress} campaigns={this.state.campaigns} stringCamapaignUrl={this.stringCamapaignUrl}/>}/>
+          <Route path="/campaigns" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} progress={this.state.progress} campaigns={this.state.campaigns} stringCamapaignUrl={this.stringCamapaignUrl}/>}/>
         </Switch>
       </div>
     );
