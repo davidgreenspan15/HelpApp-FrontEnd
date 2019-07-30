@@ -6,24 +6,38 @@ class Navbar extends React.Component{
     search: "",
   }
 
-  handleChange = (event) => {
+  setSearchState = (event) => {
     this.setState({
       search: event.target.value
-    }, () => console.log(this.state.search))
+    }, () => {
+      this.props.findCampaigns(this.state.search)
+    })
   }
 
   handleSearch = () => {
     console.log("Here")
   }
 
+
+  clearState = () => {
+    this.setState({
+      search:""
+    }, () => {
+
+      this.props.findCampaigns(this.state.search)
+    })
+  }
+
   render(){
     return(
       <div className="nav-container">
         <i className="dollar sign icon"></i>
-        <Link to="/campaigns"><div className="company-name">
+
+        <div onClick={this.clearState}><Link to="/campaigns"><div  className="company-name">
+
           Help
-        </div></Link>
-      <SearchBar findCampaigns={this.props.findCampaigns}/>
+        </div></Link></div>
+      <SearchBar findCampaigns={this.props.findCampaigns} setSearchState={this.setSearchState} search={this.state.search}/>
         {
           this.props.loggedIn ?
           <span>

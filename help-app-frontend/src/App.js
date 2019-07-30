@@ -67,6 +67,7 @@ class App extends React.Component {
     })
   }
 
+
   logout = () => {
     this.props.history.push("/login")
     this.setState({
@@ -145,6 +146,7 @@ class App extends React.Component {
     })
   }
 
+
   removeCampaign = (campaignID) => {
     this.props.history.push("/campaigns")
     this.setState({
@@ -159,10 +161,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
-
-      <Switch>
+        <Switch>
           <Route path="/campaigns/:id" render={(routerProps)=>{
               const foundCampaign = this.state.campaigns.find(campaign => campaign.id === parseInt(routerProps.match.params.id))
+
               if (foundCampaign) {
                 return (
                   <Campaign
