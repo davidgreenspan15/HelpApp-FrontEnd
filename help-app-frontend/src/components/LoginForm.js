@@ -20,7 +20,7 @@ class LoginForm extends React.Component{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accepted": "application/json"
+          "Accept": "application/json"
         },
         body: JSON.stringify({
           username: this.state.username,

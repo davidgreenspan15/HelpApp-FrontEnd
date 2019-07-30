@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './containers/NavBar'
 import TilesContainer from './containers/TilesContainer.js';
@@ -8,13 +7,14 @@ import CampaignForm from './components/CampaignForm.js'
 import SignupForm from './components/SignupForm.js'
 import LoginForm from './components/LoginForm.js'
 import {Route, Switch} from 'react-router-dom'
+import Profile from './containers/Profile.js'
 
 
 
 class App extends React.Component {
 
   state = {
-    currentUser: null,
+    currentUser: {},
     campaigns: [],
     filterCampaigns: [],
     dontations: [],
@@ -40,6 +40,7 @@ class App extends React.Component {
          })
        }
      })
+
   fetch("http://localhost:3000/campaigns")
     .then(r=> r.json())
     .then(campaigns => {
@@ -50,9 +51,15 @@ class App extends React.Component {
       })
     })
 
+    fetch("http://localhost:3000/donations")
+    .then(r=>r.json())
+    .then(donations => {
+      this.setState({
+        donations: donations
+      })
+    })
+
   }
-
-
 
   logout = () => {
     this.setState({
@@ -71,13 +78,13 @@ class App extends React.Component {
   }
 
   setUser = (user) => {
-    this.setState({
-      loggedIn: true,
-      currentUser: user.user
-    },() => {
-      localStorage.user_id = user.id
-      this.props.history.push("/campaigns")
-    })
+      this.setState({
+        loggedIn: true,
+        currentUser: user
+      },() => {
+        localStorage.user_id = user.id
+        this.props.history.push("/campaigns")
+      })
   }
 
   findCampaigns = (search) => {
@@ -86,7 +93,7 @@ class App extends React.Component {
     })
   }
 
-  findClickedCampaign = (selectedCamapaign) => {
+  findClickedCampaign = (selectedCamapaign,event) => {
     this.setState({
       foundCampaign: this.state.campaigns.find(campaign => campaign.id === selectedCamapaign.id)
     },() =>{
@@ -98,12 +105,39 @@ class App extends React.Component {
     return `/camapaigns/${this.state.foundCampaign.id}`
   }
 
+  stringProfileUrl = () => {
+    return `/profile/${localStorage.user_id}`
+  }
+
+  updatedCampaign = (updatedCampaign) => {
+    this.setState({
+      campaigns: this.state.campaigns.map(campaign => {
+        if (campaign.id === updatedCampaign.id){
+          return updatedCampaign
+        }else {
+          return campaign
+        }
+      }),
+      filterCampaigns: this.state.filterCampaigns.map(campaign =>
+      {
+        if (campaign.id === updatedCampaign.id){
+          return updatedCampaign
+        }else {
+          return campaign
+        }
+      }),
+      foundCampaign: updatedCampaign
+    })
+  }
+
+
   render(){
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
         <Switch >
-          <Route path={this.stringCamapaignUrl()} render={()=><Campaign campaign={this.state.foundCampaign}/> }/>
+          <Route path={this.stringProfileUrl()} render={()=> <Profile user={this.state.currentUser}/>}/>
+          <Route path={this.stringCamapaignUrl()} render={()=><Campaign donations={this.state.donations} updatedCampaign={this.updatedCampaign} loggedIn={this.state.loggedIn} campaign={this.state.foundCampaign}/> }/>
           <Route path="/campaignform" render={()=> <CampaignForm />}/>
           <Route path="/signup" render={()=> <SignupForm setUser={this.setUser}/>}/>
           <Route path="/login" render={()=> <LoginForm setUser={this.setUser}/>}/>

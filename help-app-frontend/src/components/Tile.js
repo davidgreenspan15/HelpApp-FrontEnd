@@ -8,28 +8,24 @@ class Tile extends React.Component{
     progress: (this.props.campaign.raised_donation/this.props.campaign.goal)*100
   }
 
-
-
-
-
   render(){
     return(
       <div className="individual-card" onClick={(event)=>this.props.findClickedCampaign(this.props.campaign,event)}>
-        <div class="ui card">
-          <div class="image">
+        <div className="ui card">
+          <div className="image">
             <img src={this.props.campaign.image} alt=""/>
           </div>
-          <div class="content">
+          <div className="content">
             <div className="header">{this.props.campaign.title}</div>
-            <div class="meta">
-              <span class="date">Created On: {this.props.campaign.created_at.split('T')[0]}</span>
+            <div className="meta">
+              <span className="date">Created On: {this.props.campaign.created_at.split('T')[0]}</span>
             </div>
-            <div class="description">
+            <div className="description">
               {this.props.campaign.description.substring(0,100) + "..."}
             </div>
           </div>
-          <div class="extra content">
-              <i class="dollar sign icon"></i>
+          <div className="extra content">
+              <i className="dollar sign icon"></i>
               <div>
                 Amount Raised: {this.props.campaign.raised_donation + "/" + this.props.campaign.goal }
                 </div>
