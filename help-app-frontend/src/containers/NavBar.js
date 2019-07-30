@@ -32,7 +32,9 @@ class Navbar extends React.Component{
     return(
       <div className="nav-container">
         <i className="dollar sign icon"></i>
+
         <div onClick={this.clearState}><Link to="/campaigns"><div  className="company-name">
+
           Help
         </div></Link></div>
       <SearchBar findCampaigns={this.props.findCampaigns} setSearchState={this.setSearchState} search={this.state.search}/>

@@ -1,9 +1,7 @@
 import React from 'react'
 
 class SearchBar extends React.Component{
-  state = {
-    search: ""
-  }
+ 
 
   handleChange = (event) => {
     this.setState({
@@ -13,6 +11,7 @@ class SearchBar extends React.Component{
       this.props.findCampaigns(this.state.search)
     })
   }
+
 
 
 

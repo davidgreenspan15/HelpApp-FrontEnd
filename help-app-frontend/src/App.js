@@ -47,7 +47,6 @@ class App extends React.Component {
       this.setState({
         campaigns: campaigns,
         filterCampaigns: campaigns
-      }, () => {
       })
     })
 
@@ -147,6 +146,17 @@ class App extends React.Component {
     })
   }
 
+
+  removeCampaign = (campaignID) => {
+    this.props.history.push("/campaigns")
+    this.setState({
+      campaigns: this.state.campaigns.filter(campaign => campaign.id !== campaignID),
+      filterCampaigns: this.state.filterCampaigns.filter(campaign => campaign.id !== campaignID)
+    })
+  }
+
+
+
   render() {
     return (
       <div className="App">
@@ -154,10 +164,16 @@ class App extends React.Component {
         <Switch>
           <Route path="/campaigns/:id" render={(routerProps)=>{
               const foundCampaign = this.state.campaigns.find(campaign => campaign.id === parseInt(routerProps.match.params.id))
-              console.log(foundCampaign)
+
               if (foundCampaign) {
                 return (
-                  <Campaign campaign={foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} loggedIn={this.state.loggedIn} />
+                  <Campaign
+                  campaign={foundCampaign}
+                  donations={this.state.donations}
+                  updatedCampaign={this.updatedCampaign}
+                  loggedIn={this.state.loggedIn}
+                  removeCampaign={this.removeCampaign}
+                  />
                 )
               }
             }}/>

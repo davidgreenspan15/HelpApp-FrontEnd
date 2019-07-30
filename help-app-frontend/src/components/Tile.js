@@ -1,6 +1,5 @@
 import React from 'react'
 import ProgressBar from '../components/ProgressBar'
-import { Link } from 'react-router-dom'
 
 class Tile extends React.Component{
 
