@@ -32,7 +32,7 @@ class Navbar extends React.Component{
               <i className="calendar plus icon"></i>
             </button>
           </Link>
-            <button className="ui yellow button"><i className="user outline icon"></i></button>
+          <Link to="/profile">  <button className="ui yellow button"><i className="user outline icon"></i></button></Link>
             <button onClick={this.props.logout} className="ui red button">Logout</button>
           </span>
           :

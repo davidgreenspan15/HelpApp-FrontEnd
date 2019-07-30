@@ -4,6 +4,9 @@ import ProgressBar from '../components/ProgressBar'
 
 class DonationContainer extends React.Component{
 
+
+
+
   state = {
       clicked: false,
       amount: 0,
@@ -21,6 +24,7 @@ class DonationContainer extends React.Component{
         [e.target.name]: parseInt(e.target.value)
       })
     }
+
 
 
     addDonation = (event) => {
@@ -51,6 +55,7 @@ class DonationContainer extends React.Component{
       })
     }
 
+
   render(){
    return(
      <div className="right-side">
@@ -58,6 +63,7 @@ class DonationContainer extends React.Component{
        <div className="progressBar"><ProgressBar progress={this.state.progress}/></div>
        <button onClick={this.handleClick} className="ui teal button">Donate Now</button>
          {
+
            this.props.loggedIn
            ? this.state.clicked
               ? <div>
@@ -74,6 +80,7 @@ class DonationContainer extends React.Component{
 
          }
          {this.renderDonationTiles()}
+
      </div>
    )
  }

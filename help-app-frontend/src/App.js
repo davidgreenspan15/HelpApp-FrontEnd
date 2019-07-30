@@ -7,7 +7,7 @@ import CampaignForm from './components/CampaignForm.js'
 import SignupForm from './components/SignupForm.js'
 import LoginForm from './components/LoginForm.js'
 import {Route, Switch} from 'react-router-dom'
-import Profile from './containers/Profile.js'
+import ProfileContainer from './containers/ProfileContainer.js'
 
 
 
@@ -17,9 +17,9 @@ class App extends React.Component {
     currentUser: {},
     campaigns: [],
     filterCampaigns: [],
-    dontations: [],
     foundCampaign: {},
-    loggedIn: false
+    loggedIn: false,
+    donations: []
 
   }
 
@@ -51,6 +51,7 @@ class App extends React.Component {
       })
     })
 
+
     fetch("http://localhost:3000/donations")
     .then(r=>r.json())
     .then(donations => {
@@ -61,30 +62,41 @@ class App extends React.Component {
 
   }
 
+  changeCurrentUser = (updatedUser) => {
+    this.setState({
+      currentUser:updatedUser
+    })
+  }
+
+
+  }
+
   logout = () => {
+    this.props.history.push("/login")
     this.setState({
       currentUser: null,
       loggedIn: false
     },() => {
       localStorage.removeItem("user_id")
-      this.props.history.push("/login")
     })
   }
 
   addCampaignToCampaigns = (newCampaign) => {
     this.setState({
       campaigns: [...this.state.campaigns,newCampaign]
-    })
+    },() => {
+      this.props.history.push("/campaigns")
+    } )
   }
 
   setUser = (user) => {
-      this.setState({
-        loggedIn: true,
-        currentUser: user
-      },() => {
-        localStorage.user_id = user.id
-        this.props.history.push("/campaigns")
-      })
+    this.setState({
+      loggedIn: true,
+      currentUser: user
+    },() => {
+      localStorage.user_id = user.id
+      this.props.history.push("/campaigns")
+    })
   }
 
   findCampaigns = (search) => {
@@ -93,11 +105,20 @@ class App extends React.Component {
     })
   }
 
-  findClickedCampaign = (selectedCamapaign,event) => {
+  findClickedCampaign = (selectedCamapaign) => {
+    fetch("http://localhost:3000/donations")
+    .then(resp => resp.json())
+    .then(donations => {
+      let campaignDonations = donations.filter(donation => donation.campaign_id === selectedCamapaign.id)
+      this.setState({
+        donations: campaignDonations
+      })
+    })
+
     this.setState({
       foundCampaign: this.state.campaigns.find(campaign => campaign.id === selectedCamapaign.id)
     },() =>{
-      this.props.history.push(this.stringCamapaignUrl())
+      this.props.history.push(`/campaigns/${selectedCamapaign.id}`)
     } )
   }
 
@@ -105,11 +126,9 @@ class App extends React.Component {
     return `/camapaigns/${this.state.foundCampaign.id}`
   }
 
-  stringProfileUrl = () => {
-    return `/profile/${localStorage.user_id}`
-  }
 
   updatedCampaign = (updatedCampaign) => {
+    
     this.setState({
       campaigns: this.state.campaigns.map(campaign => {
         if (campaign.id === updatedCampaign.id){
@@ -131,17 +150,29 @@ class App extends React.Component {
   }
 
 
+
   render(){
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
-        <Switch >
-          <Route path={this.stringProfileUrl()} render={()=> <Profile user={this.state.currentUser}/>}/>
-          <Route path={this.stringCamapaignUrl()} render={()=><Campaign donations={this.state.donations} updatedCampaign={this.updatedCampaign} loggedIn={this.state.loggedIn} campaign={this.state.foundCampaign}/> }/>
-          <Route path="/campaignform" render={()=> <CampaignForm />}/>
+
+      <Switch>
+          <Route path="/campaigns/:id" render={(routerProps)=>{
+
+              const foundCampaign = this.state.campaigns.find(campaign => campaign.id === parseInt(routerProps.match.params.id))
+              console.log(foundCampaign)
+
+              if (foundCampaign) {
+                return (
+                  <Campaign campaign={foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} loggedIn={this.state.loggedIn} />
+                )
+              }
+            }}/>
+          <Route path="/profile" render={()=> <ProfileContainer findClickedCampaign={this.findClickedCampaign} stringCamapaignUrl={this.stringCamapaignUrl}user={this.state.currentUser} campaigns={this.state.campaigns} changeCurrentUser={this.changeCurrentUser} />}/>
+          <Route path="/campaignform" render={()=> <CampaignForm  addCampaignToCampaigns={this.addCampaignToCampaigns}/>}/>
           <Route path="/signup" render={()=> <SignupForm setUser={this.setUser}/>}/>
           <Route path="/login" render={()=> <LoginForm setUser={this.setUser}/>}/>
-          <Route path="/" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} progress={this.state.progress} campaigns={this.state.campaigns} stringCamapaignUrl={this.stringCamapaignUrl}/>}/>
+          <Route path="/campaigns" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} progress={this.state.progress} campaigns={this.state.campaigns} stringCamapaignUrl={this.stringCamapaignUrl}/>}/>
         </Switch>
       </div>
     );
