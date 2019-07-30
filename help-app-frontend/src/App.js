@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './containers/NavBar'
 import TilesContainer from './containers/TilesContainer.js';
@@ -12,11 +11,10 @@ import ProfileContainer from './containers/ProfileContainer.js'
 
 
 
-
 class App extends React.Component {
 
   state = {
-    currentUser: null,
+    currentUser: {},
     campaigns: [],
     filterCampaigns: [],
     foundCampaign: {},
@@ -42,6 +40,7 @@ class App extends React.Component {
          })
        }
      })
+
   fetch("http://localhost:3000/campaigns")
     .then(r=> r.json())
     .then(campaigns => {
@@ -49,6 +48,15 @@ class App extends React.Component {
         campaigns: campaigns,
         filterCampaigns: campaigns
       }, () => {
+      })
+    })
+
+
+    fetch("http://localhost:3000/donations")
+    .then(r=>r.json())
+    .then(donations => {
+      this.setState({
+        donations: donations
       })
     })
 
@@ -61,6 +69,7 @@ class App extends React.Component {
   }
 
 
+  }
 
   logout = () => {
     this.props.history.push("/login")
@@ -95,6 +104,7 @@ class App extends React.Component {
       campaigns: this.state.filterCampaigns.filter( campaign => campaign.title.toLowerCase().includes(search.toLowerCase()))
     })
   }
+
   findClickedCampaign = (selectedCamapaign) => {
     fetch("http://localhost:3000/donations")
     .then(resp => resp.json())
@@ -104,6 +114,7 @@ class App extends React.Component {
         donations: campaignDonations
       })
     })
+
     this.setState({
       foundCampaign: this.state.campaigns.find(campaign => campaign.id === selectedCamapaign.id)
     },() =>{
@@ -115,8 +126,9 @@ class App extends React.Component {
     return `/camapaigns/${this.state.foundCampaign.id}`
   }
 
+
   updatedCampaign = (updatedCampaign) => {
-    console.log(updatedCampaign.id)
+    
     this.setState({
       campaigns: this.state.campaigns.map(campaign => {
         if (campaign.id === updatedCampaign.id){
@@ -137,12 +149,7 @@ class App extends React.Component {
     })
   }
 
-  stringUserUrl = () => {
-    return `/users/${this.state.currentUser.id}`
-  }
 
-//   {this.state.currentUser ? <ProfileContainer findClickedCampaign={this.findClickedCampaign} stringCamapaignUrl={this.stringCamapaignUrl}user={this.state.currentUser} campaigns={this.state.campaigns} changeCurrentUser={this.changeCurrentUser}/> :null
-// }
 
   render(){
     return (
@@ -157,7 +164,7 @@ class App extends React.Component {
 
               if (foundCampaign) {
                 return (
-                  <Campaign campaign={foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} />
+                  <Campaign campaign={foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} loggedIn={this.state.loggedIn} />
                 )
               }
             }}/>

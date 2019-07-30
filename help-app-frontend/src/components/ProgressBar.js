@@ -6,7 +6,7 @@ const ProgressBar = (props) => {
     <div className="progress-bar">
     { props.progress >= 6
       ? <div className="filler" style={{width: `${props.progress}%`}}></div>
-      : <div className="other-filler" style={{width: `${props.progress}%`}}></div>
+      : null
     }
     </div>
   )
