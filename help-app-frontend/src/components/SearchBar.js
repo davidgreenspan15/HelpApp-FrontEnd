@@ -13,7 +13,7 @@ class SearchBar extends React.Component{
 
   handleSearch = (e) => {
     e.preventDefault()
-    this.props.findEvents(this.state.search)
+    this.props.findCampaigns(this.state.search)
   }
 
   render(){

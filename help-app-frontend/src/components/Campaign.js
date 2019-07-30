@@ -46,9 +46,15 @@ class Campaign extends React.Component{
 
   handleDelete = () => {
     fetch(`http://localhost:3000/campaigns/${this.props.campaign.id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
     })
-    .then(this.props.history.push("/campaigns"))
+    .then(r=> {
+        this.props.removeCampaign(this.props.campaign.id)
+    })
 
   }
 

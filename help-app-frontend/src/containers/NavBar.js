@@ -20,7 +20,7 @@ class Navbar extends React.Component{
     return(
       <div className="nav-container">
         <i className="dollar sign icon"></i>
-        <Link to="/"><div className="company-name">
+        <Link to="/campaigns"><div className="company-name">
           Help
         </div></Link>
       <SearchBar findCampaigns={this.props.findCampaigns}/>

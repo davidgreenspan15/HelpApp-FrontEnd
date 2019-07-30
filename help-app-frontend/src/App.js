@@ -47,7 +47,6 @@ class App extends React.Component {
       this.setState({
         campaigns: campaigns,
         filterCampaigns: campaigns
-      }, () => {
       })
     })
 
@@ -66,9 +65,6 @@ class App extends React.Component {
     this.setState({
       currentUser:updatedUser
     })
-  }
-
-
   }
 
   logout = () => {
@@ -128,7 +124,7 @@ class App extends React.Component {
 
 
   updatedCampaign = (updatedCampaign) => {
-    
+
     this.setState({
       campaigns: this.state.campaigns.map(campaign => {
         if (campaign.id === updatedCampaign.id){
@@ -149,22 +145,33 @@ class App extends React.Component {
     })
   }
 
+  removeCampaign = (campaignID) => {
+    this.props.history.push("/campaigns")
+    this.setState({
+      campaigns: this.state.campaigns.filter(campaign => campaign.id !== campaignID),
+      filterCampaigns: this.state.filterCampaigns.filter(campaign => campaign.id !== campaignID)
+    })
+  }
 
 
-  render(){
+
+  render() {
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
 
       <Switch>
           <Route path="/campaigns/:id" render={(routerProps)=>{
-
               const foundCampaign = this.state.campaigns.find(campaign => campaign.id === parseInt(routerProps.match.params.id))
-              console.log(foundCampaign)
-
               if (foundCampaign) {
                 return (
-                  <Campaign campaign={foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} loggedIn={this.state.loggedIn} />
+                  <Campaign
+                  campaign={foundCampaign}
+                  donations={this.state.donations}
+                  updatedCampaign={this.updatedCampaign}
+                  loggedIn={this.state.loggedIn}
+                  removeCampaign={this.removeCampaign}
+                  />
                 )
               }
             }}/>
@@ -175,10 +182,8 @@ class App extends React.Component {
           <Route path="/campaigns" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} progress={this.state.progress} campaigns={this.state.campaigns} stringCamapaignUrl={this.stringCamapaignUrl}/>}/>
         </Switch>
       </div>
-    );
-
+    )
   }
-
 }
 
 export default App;
