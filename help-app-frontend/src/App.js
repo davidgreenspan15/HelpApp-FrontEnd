@@ -69,8 +69,6 @@ class App extends React.Component {
   }
 
 
-  }
-
   logout = () => {
     this.props.history.push("/login")
     this.setState({
@@ -128,7 +126,7 @@ class App extends React.Component {
 
 
   updatedCampaign = (updatedCampaign) => {
-    
+
     this.setState({
       campaigns: this.state.campaigns.map(campaign => {
         if (campaign.id === updatedCampaign.id){
@@ -149,19 +147,14 @@ class App extends React.Component {
     })
   }
 
-
-
-  render(){
+  render() {
     return (
       <div className="App">
         <Navbar logout={this.logout} loggedIn={this.state.loggedIn} findCampaigns={this.findCampaigns} />
-
-      <Switch>
+        <Switch>
           <Route path="/campaigns/:id" render={(routerProps)=>{
-
               const foundCampaign = this.state.campaigns.find(campaign => campaign.id === parseInt(routerProps.match.params.id))
               console.log(foundCampaign)
-
               if (foundCampaign) {
                 return (
                   <Campaign campaign={foundCampaign} donations={this.state.donations} updatedCampaign={this.updatedCampaign} loggedIn={this.state.loggedIn} />
@@ -175,10 +168,8 @@ class App extends React.Component {
           <Route path="/campaigns" render={() => <TilesContainer findClickedCampaign={this.findClickedCampaign} progress={this.state.progress} campaigns={this.state.campaigns} stringCamapaignUrl={this.stringCamapaignUrl}/>}/>
         </Switch>
       </div>
-    );
-
+    )
   }
-
 }
 
 export default App;
