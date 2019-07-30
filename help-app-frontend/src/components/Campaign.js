@@ -62,6 +62,7 @@ class Campaign extends React.Component{
   render(){
     return(
       <div>
+
         <h1 className="campaignTitle">{this.props.campaign.title}</h1>
         {
           this.props.loggedIn && parseInt(localStorage.user_id) === this.props.campaign.user_id ?
@@ -107,6 +108,7 @@ class Campaign extends React.Component{
           <DonationContainer loggedIn={this.props.loggedIn} campaign={this.props.campaign} donations={this.props.donations} updatedCampaign={this.props.updatedCampaign}/>
           </div>
         }
+
       </div>
     )
   }
