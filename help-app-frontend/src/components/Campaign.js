@@ -67,7 +67,7 @@ class Campaign extends React.Component{
           this.props.loggedIn && parseInt(localStorage.user_id) === this.props.campaign.user_id ?
           <div>
             <button onClick={this.handleClick} className="ui black button">Edit Campaign</button>
-            <button onClick={this.handleDelete} className="ui black button">Delete Campaign</button>
+            <button onClick={this.handleDelete} className="ui red button">Delete Campaign</button>
           </div>
           : null
         }
