@@ -60,8 +60,8 @@ class UserInfo extends React.Component{
           <form onSubmit={this.handleSubmit} class="" action="index.html" method="post">
             <input onChange={this.handlChange} type="text" name="name" value={this.state.name}/>
             <input onChange={this.handlChange} type="text" name="username" value={this.state.username}/>
-            <input onChange={this.handlChange} type="password" name="password" value={this.state.password}/>
-            <input onChange={this.handlChange} type="password" name="passwordConfirmation" value={this.state.passwordConfirmation}/>
+            <input onChange={this.handlChange} type="password" placeholder="password" name="password" value={this.state.password}/>
+            <input onChange={this.handlChange} type="password" placeholder="password confirmation" name="passwordConfirmation" value={this.state.passwordConfirmation}/>
             <input type="Submit"/>
           </form>
         </div>
