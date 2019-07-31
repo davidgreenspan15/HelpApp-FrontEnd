@@ -58,7 +58,7 @@ class SignupForm extends React.Component{
 
         <div className="field">
           <label>Name</label>
-          <input onChange={this.handleChange} type="text" name="username" placeholder="username"/>
+          <input onChange={this.handleChange} type="text" name="name" placeholder="username"/>
         </div>
 
         <div className="field">
