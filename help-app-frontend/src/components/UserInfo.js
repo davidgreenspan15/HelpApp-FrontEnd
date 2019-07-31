@@ -54,15 +54,16 @@ class UserInfo extends React.Component{
 
   render(){
     return (
+
       <div className="main-container">
         <div className= "user-form">
         {this.state.edit ?
           <div>
             <form onSubmit={this.handleSubmit} class="ui form" action="index.html" method="post">
-              <input onChange={this.handlChange} type="text" name="name" value={this.state.name}/>
-              <input onChange={this.handlChange} type="text" name="username" value={this.state.username}/>
-              <input onChange={this.handlChange} type="password" name="password" value={this.state.password}/>
-              <input onChange={this.handlChange} type="password" name="passwordConfirmation" value={this.state.passwordConfirmation}/>
+              Name: <input onChange={this.handlChange} type="text" name="name" value={this.state.name}/>
+              Username: <input onChange={this.handlChange} type="text" name="username" value={this.state.username}/>
+              Password: <input onChange={this.handlChange} type="password" name="password" value={this.state.password}/>
+              Confirm Password: <input onChange={this.handlChange} type="password" name="passwordConfirmation" value={this.state.passwordConfirmation}/>
               <input type="Submit"/>
             </form>
           </div>
@@ -77,6 +78,7 @@ class UserInfo extends React.Component{
             </div>
           </div>
         }
+
         </div>
       </div>
 

@@ -44,6 +44,10 @@ class DonationContainer extends React.Component{
        .then(resp => resp.json())
        .then(obj => {
          this.props.updatedCampaign(obj.campaign)
+         this.props.addDonation(obj)
+         this.setState({
+           progress:(this.props.campaign.raised_donation/this.props.campaign.goal)*100
+         })
        })
     }
 
@@ -79,7 +83,7 @@ class DonationContainer extends React.Component{
             : <div>Log in to donate</div>
 
          }
-         {this.renderDonationTiles()}
+         <div>{this.renderDonationTiles()}</div>
 
      </div>
    )
