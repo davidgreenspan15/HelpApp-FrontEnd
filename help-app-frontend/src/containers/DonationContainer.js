@@ -46,8 +46,9 @@ class DonationContainer extends React.Component{
          this.props.updatedCampaign(obj.campaign)
          this.props.addDonation(obj)
          this.setState({
-           progress:(this.props.campaign.raised_donation/this.props.campaign.goal)*100
-         })
+           progress:(this.props.campaign.raised_donation/this.props.campaign.goal)*100,
+           clicked: false
+         }, () => alert("Thanks for donating!"))
        })
     }
 
@@ -63,9 +64,19 @@ class DonationContainer extends React.Component{
   render(){
    return(
      <div className="right-side">
-       <div className="campaign-goal">{this.props.campaign.raised_donation} out of {this.props.campaign.goal} raised</div>
+       <div className="campaign-goal">
+        <span className="donation">
+          <h2>
+          {this.props.campaign.raised_donation}
+          <i className="dollar sign icon"></i>
+          </h2>
+        </span>
+        <span className="donation"><h4>out of</h4></span>
+        <span className="donation"><h3>{this.props.campaign.goal}</h3></span>
+        <span className="donation"><h4>raised</h4></span>
+      </div>
        <div className="progressBar"><ProgressBar progress={this.state.progress}/></div>
-       <button onClick={this.handleClick} className="ui teal button">Donate Now</button>
+       <button onClick={this.handleClick} className="ui teal button donate">Donate Now</button>
          {
 
            this.props.loggedIn
@@ -76,14 +87,14 @@ class DonationContainer extends React.Component{
                     <label>Donation</label>
                     <input onChange={this.handleChange} type="number" name="amount" placeholder="Donation Amount"/>
                     </div>
-                    <button className="ui teal button" type="submit">Submit</button>
+                    <button className="ui teal button donations" type="submit">Donate</button>
                   </form>
                   </div>
                   : null
             : <div>Log in to donate</div>
 
          }
-         <div>{this.renderDonationTiles()}</div>
+         <div className="tile-container">{this.renderDonationTiles()}</div>
 
      </div>
    )

@@ -41,7 +41,6 @@
 }
 
 .ui.icon.input{
-    /* margin-bottom: 2%; */
     max-height: 100%;
 
 }
@@ -57,11 +56,9 @@
 
 .ui.card{
   height:100% !important;
-  /* width: 100% !important; */
   margin-top: 10% !important;
   margin-bottom: 4% !important;
   margin-left: 10% !important;
-  /* margin-right: 10% !important; */
 }
 
 .individual-card{
@@ -74,6 +71,7 @@
   width: 70% !important;
   margin-left: 15% !important;
   margin-right: 15% !important;
+  box-shadow: 2px 2px 5px #888888 !important;
 }
 
 .ui.red.button.login{
@@ -108,14 +106,12 @@
 }
 
 .ui.yellow.button{
-  /* width: 5% !important; */
   float:right;
   margin-top: 1%;
   margin-bottom: 1%;
 }
 
 .ui.green.button{
-  /* width: 7% !important; */
   float:right;
   margin-top: 1%;
   margin-bottom: 1%;
@@ -169,14 +165,26 @@
 }
 
 .campaign-image{
-  max-width: 100%;
+  width: 80%;
   margin-bottom: 3%;
+  box-shadow: 2px 2px 5px #888888;
 }
 
 .right-side{
-  width: 40%;
+  width: 30%;
   margin-top: 4.65%;
+  margin-right: 5%;
   float: right;
+  display: absolute;
+  position: fixed;
+  top: 5%;
+  right:2%;
+  background-color: white;
+  box-shadow: -2px 2px 15px #888888;
+  border-radius: 20px;
+  border: 0px;
+  padding: 20px;
+  overflow: none;
 }
 
 .progressBar{
@@ -187,7 +195,7 @@
 }
 
 .campaignTitle{
-  margin-top: 6% !important;
+  margin-top: 3% !important;
 }
 
 .description{
@@ -212,21 +220,58 @@
 .user-campaigns{
   width: 50%;
   float: left;
-  height: 700px !important;
-  max-height: 10% !important;
-  overflow: scroll !important;
+  height: 650px !important;
+  overflow: scroll;
 }
 
 .user-campaigns > .individual-card{
   width: 100% !important;
-  max-height: 550px !important;
+  max-height: 100% !important;
   align-content: center !important;
+  margin-bottom: 5%;
 }
 
 .user-campaigns > .individual-card > .ui.card{
-  margin: 0 auto !important;
+  margin: 0 auto ;
 }
 
 .user-info{
   text-align: left;
+}
+
+.user-info > p {
+  font-size: 25px;
+  font-family: 'Cabin', sans-serif;
+}
+
+.donation-cards > .ui.cards{
+    box-shadow: 2px 2px 15px #888888;
+}
+
+.divider{
+  margin-bottom: 2%;
+}
+
+.split{
+  color: gray;
+}
+
+.tile-container{
+  height: 360px;
+  max-height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.ui.teal.button.donate{
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.ui.teal.button.donations{
+  margin-bottom: 5%;
+}
+
+span.donation{
+  display: inline-block;
 }

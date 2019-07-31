@@ -9,8 +9,8 @@ class Tile extends React.Component{
 
   render(){
     return(
-      <div className="individual-card" onClick={(event)=>this.props.findClickedCampaign(this.props.campaign,event)}>
-        <div className="ui card">
+      <div className="individual-card">
+        <div onClick={(event)=>this.props.findClickedCampaign(this.props.campaign,event)} className="ui card">
           <div className="image">
             <img src={this.props.campaign.image} alt=""/>
           </div>

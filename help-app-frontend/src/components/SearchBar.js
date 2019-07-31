@@ -1,7 +1,7 @@
 import React from 'react'
 
 class SearchBar extends React.Component{
- 
+
 
   handleChange = (event) => {
     this.setState({
@@ -18,7 +18,8 @@ class SearchBar extends React.Component{
   render(){
     return(
           <form className="ui icon input" action="index.html" method="post">
-            <input onChange={this.props.setSearchState} type="text" value={this.props.search} placeholder="Search..."/>
+            <i class="search icon"></i>
+            <input onChange={this.props.setSearchState} type="text" value={this.props.search} placeholder="Find Campaigns..."/>
           </form>
       )
     }
