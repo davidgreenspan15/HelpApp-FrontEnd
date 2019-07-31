@@ -111,7 +111,7 @@ class Campaign extends React.Component{
          :
          <div>
          <CampaignMainContainer campaign={this.props.campaign}/>
-          <DonationContainer loggedIn={this.props.loggedIn} campaign={this.props.campaign} donations={this.props.donations} updatedCampaign={this.props.updatedCampaign}/>
+          <DonationContainer loggedIn={this.props.loggedIn} campaign={this.props.campaign} addDonation={this.props.addDonation} donations={this.props.donations} updatedCampaign={this.props.updatedCampaign}/>
           </div>
         }
 

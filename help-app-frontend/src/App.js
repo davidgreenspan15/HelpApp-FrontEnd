@@ -108,7 +108,7 @@ class App extends React.Component {
     .then(donations => {
       let campaignDonations = donations.filter(donation => donation.campaign_id === selectedCamapaign.id)
       this.setState({
-        donations: campaignDonations
+        donations: campaignDonations.reverse()
       })
     })
 
@@ -146,6 +146,13 @@ class App extends React.Component {
     })
   }
 
+  addDonation = (obj) => {
+    console.log(obj);
+    this.setState({
+      donations: [obj.donation,...this.state.donations]
+    })
+  }
+
 
   removeCampaign = (campaignID) => {
     this.props.history.push("/campaigns")
@@ -173,6 +180,7 @@ class App extends React.Component {
                   updatedCampaign={this.updatedCampaign}
                   loggedIn={this.state.loggedIn}
                   removeCampaign={this.removeCampaign}
+                  addDonation={this.addDonation}
                   />
                 )
               }

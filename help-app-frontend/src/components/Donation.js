@@ -1,6 +1,7 @@
 import React from 'react'
-
+import moment from 'moment'
 class Donation extends React.Component{
+
 
 
 
@@ -12,8 +13,8 @@ class Donation extends React.Component{
             <div class="content">
               <div class="header">Donated By: {this.props.donation.user.username}</div>
               <div class="description">
-                  <h4>Donation Amount: {this.props.donation.amount}</h4>
-                  <h4>Donated on: {this.props.donation.created_at}</h4>
+                  <h4>Donation Amount: ${this.props.donation.amount}</h4>
+                  <h4>Donated {moment(this.props.donation.created_at).startOf('minute').fromNow()}</h4>
               </div>
             </div>
           </div>
