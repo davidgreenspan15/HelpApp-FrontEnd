@@ -7,7 +7,7 @@ class Donation extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="donation-card">
         <div class="ui cards">
           <div class="card">
             <div class="content">
