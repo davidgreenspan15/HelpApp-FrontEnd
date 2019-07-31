@@ -11,9 +11,9 @@ class UserCampaigns extends React.Component{
 
   render(){
     return(
-
-      <div>
-      {this.renderTiles()}
+      <div className="user-campaigns">
+        <h1>My Campaigns</h1>
+        {this.renderTiles()}
       </div>
     )
   }

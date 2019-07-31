@@ -34,7 +34,6 @@ class Navbar extends React.Component{
         <i className="dollar sign icon"></i>
 
         <div onClick={this.clearState}><Link to="/campaigns"><div  className="company-name">
-
           Help
         </div></Link></div>
       <SearchBar findCampaigns={this.props.findCampaigns} setSearchState={this.setSearchState} search={this.state.search}/>
@@ -47,7 +46,7 @@ class Navbar extends React.Component{
             </button>
           </Link>
           <Link to="/profile">  <button className="ui yellow button"><i className="user outline icon"></i></button></Link>
-            <button onClick={this.props.logout} className="ui red button">Logout</button>
+            <button onClick={this.props.logout} className="ui red button logout">Logout</button>
           </span>
           :
           <span>
