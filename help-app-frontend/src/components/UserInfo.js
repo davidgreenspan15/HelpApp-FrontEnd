@@ -54,25 +54,32 @@ class UserInfo extends React.Component{
 
   render(){
     return (
-      <div className= "main-container">
-      {this.state.edit ?
-        <div>
-          <form onSubmit={this.handleSubmit} class="" action="index.html" method="post">
-            <input onChange={this.handlChange} type="text" name="name" value={this.state.name}/>
-            <input onChange={this.handlChange} type="text" name="username" value={this.state.username}/>
-            <input onChange={this.handlChange} type="password" placeholder="password" name="password" value={this.state.password}/>
-            <input onChange={this.handlChange} type="password" placeholder="password confirmation" name="passwordConfirmation" value={this.state.passwordConfirmation}/>
-            <input type="Submit"/>
-          </form>
+
+      <div className="main-container">
+        <div className= "user-form">
+        {this.state.edit ?
+          <div>
+            <form onSubmit={this.handleSubmit} class="ui form" action="index.html" method="post">
+              Name: <input onChange={this.handlChange} type="text" name="name" value={this.state.name}/>
+              Username: <input onChange={this.handlChange} type="text" name="username" value={this.state.username}/>
+              Password: <input onChange={this.handlChange} type="password" name="password" value={this.state.password}/>
+              Confirm Password: <input onChange={this.handlChange} type="password" name="passwordConfirmation" value={this.state.passwordConfirmation}/>
+              <input type="Submit"/>
+            </form>
+          </div>
+          :
+          <div>
+            <h1><u>My Info</u></h1>
+            <div className="user-info">
+              <h1>Name: {this.props.user.name}</h1>
+              <h1>Username:{this.props.user.username}</h1>
+              <h1>Password: **********</h1>
+              <button onClick={this.showEditForm}> Edit</button>
+            </div>
+          </div>
+        }
+
         </div>
-        :
-        <div>
-        <h1>Name: {this.props.user.name}</h1>
-        <h1>Username:{this.props.user.username}</h1>
-        <h1>Password: **********</h1>
-        <button onClick={this.showEditForm}> Edit</button>
-        </div>
-      }
       </div>
 
 
