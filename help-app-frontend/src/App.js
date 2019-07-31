@@ -80,7 +80,8 @@ class App extends React.Component {
 
   addCampaignToCampaigns = (newCampaign) => {
     this.setState({
-      campaigns: [...this.state.campaigns,newCampaign]
+      campaigns: [...this.state.campaigns,newCampaign],
+      filterCampaigns: [...this.state.filterCampaigns,newCampaign]
     },() => {
       this.props.history.push("/campaigns")
     } )
